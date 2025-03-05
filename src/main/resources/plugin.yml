@@ -3,6 +3,7 @@ version: '1.0-SNAPSHOT'
 main: net.jadedmc.core.JadedMCPlugin
 api-version: '1.21'
 depend: [packetevents, PlaceholderAPI, LuckPerms]
+load: STARTUP
 
 commands:
   addexperience:
