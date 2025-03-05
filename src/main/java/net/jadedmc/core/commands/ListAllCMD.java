@@ -76,13 +76,13 @@ public class ListAllCMD extends AbstractCommand {
         final StringBuilder list = new StringBuilder();
         for(final Rank rank : groups.keySet()) {
             for(final Player worldPlayer : groups.get(rank)) {
-                list.append(rank.getChatColor()).append(worldPlayer.getName()).append("<white>,");
+                list.append(rank.getRankColor()).append(worldPlayer.getName()).append("<white>,");
             }
         }
 
         // Prints the list.
-        ChatUtils.chat(player, "");
-        ChatUtils.chat(player, "<center><green><bold>All Players</bold> <gray>(" + plugin.getServer().getOnlinePlayers().size() + ")");
+        ChatUtils.chat(sender, "");
+        ChatUtils.chat(sender, "<center><dark_gray><st>        </st> <green><bold>World Players</bold> <gray>(" + plugin.getServer().getOnlinePlayers().size() + ") <dark_gray><st>        </st> ");
         ChatUtils.chat(player, list.substring(0, list.length() - 1));
         ChatUtils.chat(player, "");
     }
