@@ -1,0 +1,45 @@
+name: JadedMC
+version: '1.0-SNAPSHOT'
+main: net.jadedmc.core.JadedMCPlugin
+api-version: '1.21'
+depend: [packetevents, PlaceholderAPI, LuckPerms]
+
+commands:
+  addexperience:
+    permission: jadedcore.addexperience
+  anvil:
+    permission: jadedcore.anvil
+  broadcast:
+    permission: jadedcore.broadcast
+  cancelworld:
+    permission: jadedcore.cancelworld
+  center:
+    permission: jadedcore.center
+  commandspy:
+    permission: jadedcore.commandspy
+  copyworld:
+    permission: jadedcore.copyworld
+  createworld:
+    permission: jadedcore.createworld
+  discord:
+    description: View a link to the discord server.
+  feed:
+    permission: jadedcore.feed
+  fly:
+    permission: jadedcore.fly
+  instances:
+    permission: jadedcore.instances
+  list:
+    description: List all online players.
+  listall:
+    permission: jadedcore.listall
+  loadworld:
+    permission: jadedcore.loadworld
+  players:
+    permission: jadedcore.players
+  profile:
+    description: View your profile.
+  setlobby:
+    permission: jadedcore.setlobby
+  stuck:
+    description: Go back to the spawn.
