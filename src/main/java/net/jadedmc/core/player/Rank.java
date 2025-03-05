@@ -32,17 +32,17 @@ import net.jadedmc.utils.chat.StringUtils;
  * Represents a rank in the server.
  */
 public enum Rank {
-    OWNER("owner", 11, "<red><bold>Owner</bold></red>", "<red>", "<red>", ""),
-    ADMIN("admin", 10, "<red><bold>Admin</bold></red>", "<red>", "<red>", ""),
-    MOD("mod", 9, "<gold><bold>Mod</bold></gold>", "<gold>", "<gold>", ""),
-    TRIAL("trial", 8, "<gold><bold>Trial</bold></gold>", "<gold>", "<gold>", ""),
-    BUILDER("builder", 7, "<yellow><bold>Builder</bold></yellow>", "<yellow>", "<yellow>", ""),
-    DEVELOPER("developer", 6, "<yellow><bold>Developer</bold></yellow>", "<yellow>", "<yellow>", ""),
-    YOUTUBE("youtube", 5, "<bold><red>You</red><white>Tube</white></bold>", "<white>", "<white>", ""),
-    JADED("jaded", 4, "<green><bold>Jaded</bold></green>", "<gray>", "<green>", ""),
-    SAPPHIRE("sapphire", 3, "<blue><bold>Sapphire</bold></blue>", "<gray>", "<blue>", ""),
-    AMETHYST("amethyst", 2, "<gradient:#7605ff:#ac0ef6><bold>Amethyst</bold></gradient>", "<gray>", "<color:#ac0ef6>", "&5&lAmethyst"),
-    GARNET("garnet", 1, "<light_purple><bold>Garnet</bold></light_purple>", "<gray>", "<light_purple>", ""),
+    OWNER("owner", 11, "<gradient:#ff2c3a:#fa7070><bold>Owner</bold></gradient>", "<color:#fa7070>", "<gradient:#ff2c3a:#fa7070>", "&c&lOwner"),
+    ADMIN("admin", 10, "<gradient:#ff2c3a:#fa7070><bold>Admin</bold></gradient>", "<color:#fa7070>", "<gradient:#ff2c3a:#fa7070>", "&c&lAdmin"),
+    MOD("mod", 9, "<gradient:#ff5f05:#fa7c33><bold>Mod</bold></gradient>", "<color:#fa7c33>", "<gradient:#ff5f05:#fa7c33>", "&6&lMod"),
+    HELPER("helper", 8, "<gradient:#ff5f05:#fa7c33><bold>Helper</bold></gradient>", "<color:#fa7c33>", "<gradient:#ff5f05:#fa7c33>", "&6&lHelper"),
+    BUILDER("builder", 7, "<gradient:#ffb905:#ffd43a><bold>Builder</bold></gradient>", "<color:#ffd43a>", "<gradient:#ffb905:#ffd43a>", "&e&lBuilder"),
+    DEVELOPER("developer", 6, "<gradient:#ffb905:#ffd43a><bold>Developer</bold></gradient>", "<color:#ffd43a>", "<gradient:#ffb905:#ffd43a>", "&e&lDeveloper"),
+    YOUTUBE("youtube", 5, "<gradient:#ff0505:#ffffff><bold>YouTube</bold></gradient>", "<white>", "<gradient:#ff0505:#ffffff>", "&c&lYou&f&lTube"),
+    JADED("jaded", 4, "<gradient:#0dff46:#acfa70><bold>Jaded</bold></gradient>", "<color:#acfa70>", "<gradient:#0dff46:#acfa70>", "&a&lJaded"),
+    SAPPHIRE("sapphire", 3, "<gradient:#1657fe:#577cff><bold>Sapphire</bold></gradient>", "<color:#577cff>", "<gradient:#1657fe:#577cff>", "&9&lSapphire"),
+    AMETHYST("amethyst", 2, "<gradient:#7605ff:#ac0ef6><bold>Amethyst</bold></gradient>", "<color:#ac0ef6>", "<gradient:#7605ff:#ac0ef6>", "&5&lAmethyst"),
+    GARNET("garnet", 1, "<gradient:#ff05aa:#fc31c2><bold>Garnet</bold></gradient>", "<color:#fc31c2>", "<gradient:#ff05aa:#fc31c2>", "&d&lGarnet"),
     DEFAULT("default", 0, "<gray>Default</gray>", "<gray>", "<gray>", "");
 
     private final String name;
