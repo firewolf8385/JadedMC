@@ -29,14 +29,25 @@ import net.jadedmc.utils.chat.ChatUtils;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * This class runs the discord command, which sends a link to the server's discord server.
+ */
 public class DiscordCMD extends AbstractCommand {
 
+    /**
+     * Creates the /discord command with no required permission.
+     */
     public DiscordCMD() {
         super("discord", "", true);
     }
 
+    /**
+     * This is the code that runs when the command is sent.
+     * @param sender The player (or console) that sent the command.
+     * @param args The arguments of the command.
+     */
     @Override
     public void execute(@NotNull final CommandSender sender, final String[] args) {
-        ChatUtils.chat(sender, "&a&lDiscord &8» &aJoin our discord server at &f<click:open_url:'http://discord.gg/YWGFeNA'>http://discord.gg/YWGFeNA</click>&a.");
+        ChatUtils.chat(sender, "<color:#7289da><bold>Discord</bold></color> <dark_gray>»</dark_gray> <color:#7289da>Join our discord server at <white><click:open_url:'http://discord.gg/YWGFeNA'>http://discord.gg/YWGFeNA</click></white>.</color>");
     }
 }
