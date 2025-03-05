@@ -27,10 +27,11 @@ package net.jadedmc.core;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import net.jadedmc.core.minigames.Minigame;
 import net.jadedmc.core.networking.CurrentInstance;
 import net.jadedmc.core.networking.Instance;
+import net.jadedmc.core.networking.InstanceType;
 import net.jadedmc.core.networking.NetworkPlayer;
-import net.jadedmc.utils.chat.ChatUtils;
 import net.jadedmc.utils.chat.StringUtils;
 import net.jadedmc.utils.player.PlayerMap;
 import org.bson.Document;
@@ -41,9 +42,16 @@ import redis.clients.jedis.Jedis;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * A collection of methods for interacting with the JadedMC core.
+ */
 public class JadedAPI {
     private static JadedMCPlugin plugin = null;
 
+    /**
+     * Initializes the API.
+     * @param pl Instance of the plugin.
+     */
     public static void init(@NotNull final JadedMCPlugin pl) {
         plugin = pl;
     }
@@ -69,7 +77,12 @@ public class JadedAPI {
         return players;
     }
 
-    public static Instance getServer(String serverName) {
+    /**
+     * Get the Instance object of a given server.
+     * @param serverName Name of the server.
+     * @return Instance object of the server.
+     */
+    public static Instance getServer(@NotNull final String serverName) {
         return plugin.getInstanceMonitor().getInstance(serverName);
     }
 
@@ -90,6 +103,51 @@ public class JadedAPI {
 
     public static void sendToServer(@NotNull final UUID uuid, @NotNull final String server) {
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> plugin.getRedis().publish("jadedmc", "connect " + uuid.toString() + " " + server));
+    }
+
+    public static void sendToLobby(@NotNull final Player player, final Minigame minigame) {
+        plugin.getInstanceMonitor().getInstancesAsync().thenAccept(instances -> {
+            String serverName = "";
+            {
+                int count = 999;
+
+                // Loop through all online servers looking for a server to send the player to
+                for (Instance instance : instances) {
+                    // Make sure the server is the right mode
+                    if (instance.getMinigame() != minigame) {
+                        continue;
+                    }
+
+                    // Make sure the server isn't a game server.
+                    if (instance.getType() != InstanceType.LOBBY && instance.getType() != InstanceType.OTHER) {
+                        continue;
+                    }
+
+                    // Make sure there is room for another game.
+                    if (instance.getOnline() >= instance.getCapacity()) {
+                        System.out.println("Not enough room!");
+                        continue;
+                    }
+
+                    //
+                    if (instance.getOnline() < count) {
+                        count = instance.getOnline();
+                        serverName = instance.getName();
+                    }
+                }
+
+                // If no server is found, give up ¯\_(ツ)_/¯
+                if (count == 999) {
+                    System.out.println("No Server Found!");
+                    return;
+                }
+
+                String finalServerName = serverName;
+                plugin.getServer().getScheduler().runTask(plugin, () -> {
+                    JadedAPI.sendBungeecordMessage(player, "BungeeCord", "Connect", finalServerName);
+                });
+            }
+        }).whenComplete((results, error) -> error.printStackTrace());
     }
 
     public static int getRequiredExp(int level) {
