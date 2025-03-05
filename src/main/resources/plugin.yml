@@ -7,40 +7,63 @@ load: STARTUP
 
 commands:
   addexperience:
+    description: Add network experience to a player.
     permission: jadedcore.addexperience
   anvil:
     permission: jadedcore.anvil
   broadcast:
-    permission: jadedcore.broadcast
+    description: Broadcast command.
+    usage: /broadcast
+    aliases: [ bc ]
+    permission: jadecore.broadcast
   cancelworld:
+    description: Exits out of a loaded world without saving.
     permission: jadedcore.cancelworld
   center:
+    description: Center yourself on a block.
     permission: jadedcore.center
   commandspy:
+    description: Spy on commands.
+    usage: /<command>
+    aliases: [ cmdspy ]
     permission: jadedcore.commandspy
   copyworld:
-    permission: jadedcore.copyworld
+    description: Copies a given world.
+    permission: jadedcore.copyworld.
   createworld:
+    description: Creates a world.
     permission: jadedcore.createworld
   discord:
     description: View a link to the discord server.
   feed:
+    description: Fill a player's hunger and saturation bars.
+    usage: /<command>
     permission: jadedcore.feed
   fly:
+    description: Toggles flight
+    usage: /<command>
     permission: jadedcore.fly
   instances:
+    description: View all online instances.
+    usage: /<command>
     permission: jadedcore.instances
+    aliases: [ servers ]
   list:
-    description: List all online players.
+    description: View online players in the world.
+    permission: jadedcore.list
   listall:
+    description: View online players in the server.
     permission: jadedcore.listall
   loadworld:
+    description: Loads a world.
     permission: jadedcore.loadworld
   players:
+    description: View all online network players.
     permission: jadedcore.players
   profile:
     description: View your profile.
   setlobby:
+    description: Sets the lobby spawn.
     permission: jadedcore.setlobby
   stuck:
     description: Go back to the spawn.
