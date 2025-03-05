@@ -62,15 +62,13 @@ public class InstanceMonitor {
                 playerCounts.clear();
                 playerCount = 0;
 
-                System.out.println("Instances Found: " + instances.size());
-
                 // Add back all the valid Minigames.
-                for(Minigame minigame : Minigame.values()) {
+                for(final Minigame minigame : Minigame.values()) {
                     playerCounts.put(minigame, 0);
                 }
 
                 // Check every online instance.
-                for(Instance instance : instances) {
+                for(final Instance instance : instances) {
                     // Update per-mode player-count.
                     playerCounts.put(instance.getMinigame(), playerCounts.get(instance.getMinigame()) + instance.getOnline());
 
