@@ -171,5 +171,12 @@
             <version>2.1.3</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.JadedMC</groupId>
+            <artifactId>JadedChat</artifactId>
+            <version>0.7</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>

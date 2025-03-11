@@ -110,6 +110,7 @@ public final class JadedMCPlugin extends JavaPlugin {
         // Plugin listeners.
         getServer().getPluginManager().registerEvents(new BlockBreakListener(this), this);
         getServer().getPluginManager().registerEvents(new BlockPlaceListener(this), this);
+        getServer().getPluginManager().registerEvents(new ChannelMessageSendListener(this), this);
         getServer().getPluginManager().registerEvents(new EntityDamageListener(this), this);
         getServer().getPluginManager().registerEvents(new FoodLevelChangeListener(this), this);
         getServer().getPluginManager().registerEvents(new PlayerChangeWorldListener(this), this);
