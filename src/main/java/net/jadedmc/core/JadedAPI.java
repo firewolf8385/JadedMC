@@ -27,11 +27,13 @@ package net.jadedmc.core;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import net.jadedmc.core.database.MongoDB;
+import net.jadedmc.core.database.MySQL;
+import net.jadedmc.core.database.Redis;
 import net.jadedmc.core.minigames.Minigame;
-import net.jadedmc.core.networking.CurrentInstance;
-import net.jadedmc.core.networking.Instance;
-import net.jadedmc.core.networking.InstanceType;
-import net.jadedmc.core.networking.NetworkPlayer;
+import net.jadedmc.core.networking.*;
+import net.jadedmc.core.player.JadedPlayer;
+import net.jadedmc.core.worlds.WorldManager;
 import net.jadedmc.utils.chat.StringUtils;
 import net.jadedmc.utils.player.PlayerMap;
 import org.bson.Document;
@@ -176,5 +178,39 @@ public class JadedAPI {
         }
 
         return StringUtils.translateLegacyMessage(bar);
+    }
+
+    public static MongoDB getMongoDB() {
+        return plugin.getMongoDB();
+    }
+
+    public static MySQL getMySQL() {
+        return plugin.getMySQL();
+    }
+
+    public static Redis getRedis() {
+        return plugin.getRedis();
+    }
+
+    public static void sendToLocalLobby(@NotNull final Player player) {
+        plugin.getLobbyManager().sendToLocalLobby(player);
+    }
+
+    public static WorldManager getWorldManager() {
+        return plugin.getWorldManager();
+    }
+
+    @Deprecated
+    public static JadedMCPlugin getPlugin() {
+        return plugin;
+    }
+
+    @Deprecated
+    public static InstanceMonitor getInstanceMonitor() {
+        return plugin.getInstanceMonitor();
+    }
+
+    public static JadedPlayer getJadedPlayer(@NotNull final Player player) {
+        return plugin.getJadedPlayerManager().getPlayer(player);
     }
 }
