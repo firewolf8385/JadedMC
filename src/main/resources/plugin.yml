@@ -65,6 +65,9 @@ commands:
     permission: jadedcore.players
   profile:
     description: View your profile.
+  saveworld:
+    description: Save the current world to the worlds database.
+    permission: jadedcore.saveworld
   setlobby:
     description: Sets the lobby spawn.
     permission: jadedcore.setlobby
