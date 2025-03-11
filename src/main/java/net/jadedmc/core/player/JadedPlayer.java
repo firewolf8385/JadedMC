@@ -350,7 +350,7 @@ public class JadedPlayer extends PluginPlayer {
         this.experience = experience;
 
         try {
-            final PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("UPDATE jadedlevels_players SET experience = ? WHERE uuid = ?");
+            final PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("UPDATE player_info SET experience = ? WHERE uuid = ?");
             statement.setInt(1, experience);
             statement.setString(2, player.getUniqueId().toString());
             statement.executeUpdate();
@@ -365,7 +365,7 @@ public class JadedPlayer extends PluginPlayer {
 
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
             try {
-                final PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("UPDATE jadedlevels_players SET level = ? WHERE uuid = ?");
+                final PreparedStatement statement = plugin.getMySQL().getConnection().prepareStatement("UPDATE player_info SET level = ? WHERE uuid = ?");
                 statement.setInt(1, level);
                 statement.setString(2, player.getUniqueId().toString());
                 statement.executeUpdate();
