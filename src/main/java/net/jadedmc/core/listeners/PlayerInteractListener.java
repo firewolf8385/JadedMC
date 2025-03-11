@@ -26,6 +26,7 @@
 package net.jadedmc.core.listeners;
 
 import net.jadedmc.core.JadedMCPlugin;
+import net.jadedmc.core.guis.GamesGUI;
 import net.jadedmc.core.guis.ProfileGUI;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
@@ -67,7 +68,7 @@ public class PlayerInteractListener implements Listener {
 
         switch (item) {
             case "Games" -> {
-                // TODO: Games GUI: new GamesGUI().open(player);
+                new GamesGUI(plugin).open(player);
                 event.setCancelled(true);
             }
             case "Profile" -> {
