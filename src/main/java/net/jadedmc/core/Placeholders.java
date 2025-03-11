@@ -26,12 +26,14 @@
 package net.jadedmc.core;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import net.jadedmc.core.minigames.Minigame;
 import net.jadedmc.core.player.JadedPlayer;
 import net.jadedmc.utils.chat.ChatUtils;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * This class will be registered through the register-method in the
@@ -196,6 +198,11 @@ class Placeholders extends PlaceholderExpansion {
 
         if(identifier.contains("level")) {
             return jadedPlayer.getLevel() + "";
+        }
+
+        if(identifier.contains("playing_")) {
+            final Minigame minigame = Minigame.valueOf(Arrays.stream(identifier.split("playing_")).toList().getLast().toUpperCase()) ;
+            return plugin.getInstanceMonitor().getPlayerCount(minigame) + "";
         }
 
         return null;
