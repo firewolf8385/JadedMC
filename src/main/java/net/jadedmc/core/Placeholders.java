@@ -31,6 +31,8 @@ import net.jadedmc.utils.chat.ChatUtils;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 /**
  * This class will be registered through the register-method in the
  * plugins onEnable-method.
@@ -114,12 +116,10 @@ class Placeholders extends PlaceholderExpansion {
 
     @Override
     public String onPlaceholderRequest(Player player, String identifier) {
-        // TODO: Leaderboards
         // Overall
-        /*
         if(identifier.contains("top_ap_name")) {
             int place = Integer.parseInt(identifier.replaceAll("\\D+","")) - 1;
-            ArrayList<String> temp = new ArrayList<>(plugin.leaderboardManager().getAchievementPointsLeaderboard().keySet());
+            ArrayList<String> temp = new ArrayList<>(plugin.getLeaderboardManager().getAchievementPointsLeaderboard().keySet());
             if(temp.size() < place + 1) {
                 return "---";
             }
@@ -129,7 +129,7 @@ class Placeholders extends PlaceholderExpansion {
 
         if(identifier.contains("top_ap_value")) {
             int place = Integer.parseInt(identifier.replaceAll("\\D+","")) - 1;
-            ArrayList<Integer> temp = new ArrayList<>(plugin.leaderboardManager().getAchievementPointsLeaderboard().values());
+            ArrayList<Integer> temp = new ArrayList<>(plugin.getLeaderboardManager().getAchievementPointsLeaderboard().values());
 
             if(temp.size() < place + 1) {
                 return "---";
@@ -137,8 +137,6 @@ class Placeholders extends PlaceholderExpansion {
 
             return temp.get(place) + "";
         }
-
-         */
 
         JadedPlayer jadedPlayer = plugin.getJadedPlayerManager().getPlayer(player);
 
@@ -193,8 +191,7 @@ class Placeholders extends PlaceholderExpansion {
         }
 
         if(identifier.contains("achievement_points")) {
-            // TODO: return jadedPlayer.getAchievementPoints() + "";
-            return "0";
+            return jadedPlayer.getAchievementPoints() + "";
         }
 
         if(identifier.contains("level")) {
