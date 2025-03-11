@@ -82,6 +82,9 @@ public final class JadedMCPlugin extends JavaPlugin {
         achievementManager = new AchievementManager(this);
         leaderboardManager = new LeaderboardManager(this);
 
+        // Allow the plugin to send messages to the proxy.
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+
         // Updates scoreboards every second
         new ScoreboardUpdate().runTaskTimer(this, 20L, 20L);
 
