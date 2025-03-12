@@ -78,7 +78,7 @@ public abstract class AbstractCommand implements CommandExecutor {
         //new GamesCMD();
         //new GrindstoneCMD();
         //new HealCMD();
-        //new InstanceCMD();
+        new InstanceCMD();
         new InstancesCMD(pl);
         //new InvSeeCMD();
         //new JamisonCMD();
@@ -90,7 +90,7 @@ public abstract class AbstractCommand implements CommandExecutor {
         new PlayersCMD(pl);
         new ProfileCMD(pl);
         //new RankCMD(pl);
-        //new RebootCMD();
+        new RebootCMD();
         //new RenameCMD();
         //new RulesCMD();
         new SaveWorldCMD(pl);

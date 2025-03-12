@@ -43,6 +43,9 @@ commands:
     description: Toggles flight
     usage: /<command>
     permission: jadedcore.fly
+  instance:
+    description: Control the current instance.
+    permission: jadedcore.instance
   instances:
     description: View all online instances.
     usage: /<command>
@@ -65,6 +68,9 @@ commands:
     permission: jadedcore.players
   profile:
     description: View your profile.
+  reboot:
+    description: Reboot the current instance.
+    permission: jadedcore.reboot
   saveworld:
     description: Save the current world to the worlds database.
     permission: jadedcore.saveworld
