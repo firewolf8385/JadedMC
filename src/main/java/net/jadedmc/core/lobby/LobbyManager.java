@@ -30,6 +30,7 @@ import net.jadedmc.core.events.LobbyJoinEvent;
 import net.jadedmc.utils.LocationUtils;
 import net.jadedmc.utils.items.ItemBuilder;
 import net.jadedmc.utils.items.SkullBuilder;
+import net.jadedmc.utils.scoreboard.CustomScoreboard;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -74,6 +75,14 @@ public class LobbyManager {
 
         // Reads the spawn using LocationUtils#fromConfig.
         return LocationUtils.fromConfig(spawnSection);
+    }
+
+    public CustomScoreboard getLobbyScoreboard(@NotNull final Player player) {
+        if(plugin.getConfigManager().getConfig().getBoolean("Lobby.Scoreboard.Enabled")) {
+            return new LobbyScoreboard(plugin, player);
+        }
+
+        return null;
     }
 
     /**
