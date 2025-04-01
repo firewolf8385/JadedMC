@@ -26,6 +26,7 @@
 package net.jadedmc.core.leaderboards;
 
 import net.jadedmc.core.JadedMCPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,7 +45,7 @@ public class LeaderboardManager {
      * Creates the manager.
      * @param plugin Instance of the plugin.
      */
-    public LeaderboardManager(JadedMCPlugin plugin) {
+    public LeaderboardManager(@NotNull final JadedMCPlugin plugin) {
         this.plugin = plugin;
 
         // Creates a task that updates the leaderboards every 20 minutes

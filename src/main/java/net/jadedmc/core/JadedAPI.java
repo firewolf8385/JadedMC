@@ -27,6 +27,7 @@ package net.jadedmc.core;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import net.jadedmc.core.achievements.Achievement;
 import net.jadedmc.core.database.MongoDB;
 import net.jadedmc.core.database.MySQL;
 import net.jadedmc.core.database.Redis;
@@ -36,11 +37,16 @@ import net.jadedmc.core.player.JadedPlayer;
 import net.jadedmc.core.worlds.WorldManager;
 import net.jadedmc.utils.chat.StringUtils;
 import net.jadedmc.utils.player.PlayerMap;
+import net.jadedmc.utils.player.PluginPlayer;
 import org.bson.Document;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import redis.clients.jedis.Jedis;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
 
@@ -180,22 +186,11 @@ public class JadedAPI {
         return StringUtils.translateLegacyMessage(bar);
     }
 
-    public static MongoDB getMongoDB() {
-        return plugin.getMongoDB();
-    }
-
-    public static MySQL getMySQL() {
-        return plugin.getMySQL();
-    }
-
-    public static Redis getRedis() {
-        return plugin.getRedis();
-    }
-
     public static void sendToLocalLobby(@NotNull final Player player) {
         plugin.getLobbyManager().sendToLocalLobby(player);
     }
 
+    @Deprecated
     public static WorldManager getWorldManager() {
         return plugin.getWorldManager();
     }
@@ -210,7 +205,83 @@ public class JadedAPI {
         return plugin.getInstanceMonitor();
     }
 
+    public static PlayerMap<NetworkPlayer> getPlayers(final Minigame... minigames) {
+        final PlayerMap<NetworkPlayer> players = new PlayerMap<>();
+
+        try(Jedis jedis = plugin.getRedis().jedisPool().getResource()) {
+            final Set<String> names = jedis.keys("jadedplayers:*");
+
+            for(String key : names) {
+                String json = jedis.get(key);
+                Document document = Document.parse(json);
+
+                if(!Arrays.asList(minigames).contains(Minigame.valueOf(document.getString("game")))) {
+                    continue;
+                }
+
+                players.add(new NetworkPlayer(document));
+            }
+        }
+
+        return players;
+    }
+
+    // -----------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------
+
+    /**
+     * Creates an achievement that can be unlocked in a given mode.
+     * @param minigame Minigame the achievement is for.
+     * @param id id of the achievement.
+     * @param name Name of the achievement.
+     * @param description Description of the achievement.
+     * @param points How many Achievement Points obtaining the achievement awards.
+     * @param rewards All rewards (not counting achievement points) the achievement gives.
+     */
+    public static void createAchievement(final Minigame minigame, @NotNull final String id, @NotNull final String name, @NotNull final String description, final int points, @NotNull String... rewards) {
+        plugin.getAchievementManager().createAchievement(minigame, id, name, description, points, rewards);
+    }
+
+    public static Achievement getAchievement(@NotNull final String id) {
+        return plugin.getAchievementManager().getAchievement(id);
+    }
+
+    public static Collection<Achievement> getAchievements(final Minigame minigame) {
+        return plugin.getAchievementManager().getAchievements(minigame);
+    }
+
     public static JadedPlayer getJadedPlayer(@NotNull final Player player) {
         return plugin.getJadedPlayerManager().getPlayer(player);
+    }
+
+    public static JadedPlayer getJadedPlayer(@NotNull final PluginPlayer pluginPlayer) {
+        return plugin.getJadedPlayerManager().getPlayer(pluginPlayer.getUniqueId());
+    }
+
+    public static JadedPlayer getJadedPlayer(@NotNull final UUID uuid) {
+        return plugin.getJadedPlayerManager().getPlayer(uuid);
+    }
+
+    public static MongoDB getMongoDB() {
+        return plugin.getMongoDB();
+    }
+
+    public static MySQL getMySQL() {
+        return plugin.getMySQL();
+    }
+
+    public static Redis getRedis() {
+        return plugin.getRedis();
+    }
+
+    /**
+     * Check if a given world is a lobby world.
+     * @param world World to check.
+     * @return True if it is a lobby world, false if it is not.
+     */
+    public static boolean isLobbyWorld(@NotNull final World world) {
+        return plugin.getLobbyManager().isLobbyWorld(world);
     }
 }
