@@ -50,6 +50,10 @@
                             <pattern>redis.clients.jedis</pattern>
                             <shadedPattern>net.jadedmc.libraries.jedis</shadedPattern>
                         </relocation>
+                        <relocation>
+                            <pattern>org.bson</pattern>
+                            <shadedPattern>net.jadedmc.libraries.bson</shadedPattern>
+                        </relocation>
                     </relocations>
                 </configuration>
             </plugin>
