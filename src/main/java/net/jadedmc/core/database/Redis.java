@@ -122,7 +122,7 @@ public class Redis {
                             });
 
                         }
-                    }, "jadedmc", "party");
+                    }, "jadedmc");
                 }
                 catch (Exception exception) {
                     exception.printStackTrace();
