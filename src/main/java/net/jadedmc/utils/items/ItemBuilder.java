@@ -36,7 +36,6 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.components.UseCooldownComponent;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 
@@ -56,8 +55,8 @@ public class ItemBuilder {
      * @param itemStack Starting ItemStack.
      */
     public ItemBuilder(final ItemStack itemStack) {
-        this.itemStack = itemStack;
-        this.itemMeta = itemStack.getItemMeta();
+        this.itemStack = itemStack.clone();
+        this.itemMeta = itemStack.getItemMeta().clone();
     }
 
     /**
