@@ -36,6 +36,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.components.UseCooldownComponent;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 
@@ -189,6 +190,17 @@ public class ItemBuilder {
      */
     public ItemBuilder setAmount(final int amount) {
         this.itemStack.setAmount(amount);
+        return this;
+    }
+
+    /**
+     * Set the cooldown of an item.
+     * @param seconds Seconds of cooldown for the item.
+     * @return ItemBuilder.
+     */
+    public ItemBuilder setCooldown(final float seconds) {
+        this.itemMeta.getUseCooldown().setCooldownSeconds(seconds);
+
         return this;
     }
 
