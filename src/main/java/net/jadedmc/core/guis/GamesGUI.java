@@ -53,11 +53,7 @@ public class GamesGUI extends CustomGUI {
                 .addFlag(ItemFlag.HIDE_UNBREAKABLE);
         setItem(20, cactusRush.build(), (p,a) -> JadedAPI.sendToLobby(p, Minigame.CACTUS_RUSH));
 
-        ItemBuilder duels = new ItemBuilder(Material.GRAY_DYE)
-                .setDisplayName("<red><bold>Coming Soon");
-        setItem(22, duels.build());
-        // TODO: Duels release
-        /*
+
         ItemBuilder duels = new ItemBuilder(Material.IRON_SWORD)
                 .setDisplayName("<green><bold>Duels")
                 .addLore("<dark_gray>Competitive")
@@ -71,26 +67,7 @@ public class GamesGUI extends CustomGUI {
                 .addFlag(ItemFlag.HIDE_ATTRIBUTES)
                 .addFlag(ItemFlag.HIDE_UNBREAKABLE);
 
-        setItem(22, duels.build(), (p, a) -> {
-            final JadedPlayer jadedPlayer = JadedAPI.getJadedPlayer(p);
-            final int protocol = jadedPlayer.getProtocolVersion();
-            final Minigame minigame;
-
-
-            if(protocol == 0) {
-                minigame = Minigame.DUELS_MODERN;
-            }
-            else if(protocol > ProtocolVersion.v1_9.getVersion()) {
-                minigame = Minigame.DUELS_MODERN;
-            }
-            else {
-                minigame = Minigame.DUELS_LEGACY;
-            }
-
-            JadedAPI.sendToLobby(p, minigame);
-        });
-
-         */
+        setItem(22, duels.build(), (p, a) -> JadedAPI.sendToLobby(p, Minigame.DUELS));
 
         // TODO: Release ElytraPvP
         /*
@@ -122,8 +99,6 @@ public class GamesGUI extends CustomGUI {
                 .addFlag(ItemFlag.HIDE_UNBREAKABLE);
         setItem(30, lobby.build(), (p,a) -> JadedAPI.sendToLobby(p, Minigame.HUB));
 
-        // TODO: Implement Limbo
-        /*
         ItemBuilder limbo = new ItemBuilder(Material.BEDROCK)
                 .setDisplayName("<green><bold>Limbo")
                 .addLore("")
@@ -134,14 +109,6 @@ public class GamesGUI extends CustomGUI {
                 .addFlag(ItemFlag.HIDE_UNBREAKABLE);
         setItem(31, limbo.build(), (p,a) -> JadedAPI.sendBungeecordMessage(p, "BungeeCord", "Connect", "limbo"));
 
-         */
-
-        ItemBuilder limbo = new ItemBuilder(Material.GRAY_DYE)
-                .setDisplayName("<red><bold>Coming Soon");
-        setItem(31, limbo.build());
-
-        // TODO: Implement Tournaments
-        /*
         ItemBuilder tournaments = new ItemBuilder(Material.GOLD_INGOT)
                 .setDisplayName("<green><bold>Tournament Lobby")
                 .addLore("")
@@ -150,29 +117,6 @@ public class GamesGUI extends CustomGUI {
                 .setUnbreakable(true)
                 .addFlag(ItemFlag.HIDE_ATTRIBUTES)
                 .addFlag(ItemFlag.HIDE_UNBREAKABLE);
-        setItem(32, tournaments.build(), (p,a) -> {
-            final JadedPlayer jadedPlayer = JadedAPI.getJadedPlayer(p);
-            final int protocol = jadedPlayer.getProtocolVersion();
-            final Minigame minigame;
-
-
-            if(protocol == 0) {
-                minigame = Minigame.TOURNAMENTS_MODERN;
-            }
-            else if(protocol > ProtocolVersion.v1_9.getVersion()) {
-                minigame = Minigame.TOURNAMENTS_MODERN;
-            }
-            else {
-                minigame = Minigame.TOURNAMENTS_LEGACY;
-            }
-
-            JadedAPI.sendToLobby(p, minigame);
-        });
-
-         */
-
-        ItemBuilder tournaments = new ItemBuilder(Material.GRAY_DYE)
-                .setDisplayName("<red><bold>Coming Soon");
-        setItem(32, tournaments.build());
+        setItem(32, tournaments.build(), (p,a) -> JadedAPI.sendToLobby(p, Minigame.TOURNAMENTS));
     }
 }
