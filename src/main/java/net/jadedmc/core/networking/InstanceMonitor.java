@@ -27,6 +27,7 @@ package net.jadedmc.core.networking;
 
 import net.jadedmc.core.JadedMCPlugin;
 import net.jadedmc.core.minigames.Minigame;
+import org.jetbrains.annotations.NotNull;
 import redis.clients.jedis.Jedis;
 
 import java.util.*;
@@ -45,7 +46,7 @@ public class InstanceMonitor {
      * Creates the InstanceMonitor.
      * @param plugin Instance of the plugin.
      */
-    public InstanceMonitor(final JadedMCPlugin plugin) {
+    public InstanceMonitor(@NotNull final JadedMCPlugin plugin) {
         this.plugin = plugin;
         this.currentInstance = new CurrentInstance(plugin);
 
@@ -60,7 +61,7 @@ public class InstanceMonitor {
             getInstancesAsync().thenAccept(instances -> {
                 // Reset cached online count.
                 playerCounts.clear();
-                playerCount = 0;
+                this.playerCount = 0;
 
                 // Add back all the valid Minigames.
                 for(final Minigame minigame : Minigame.values()) {
@@ -73,7 +74,7 @@ public class InstanceMonitor {
                     playerCounts.put(instance.getMinigame(), playerCounts.get(instance.getMinigame()) + instance.getOnline());
 
                     // Update global player count.
-                    playerCount += instance.getOnline();
+                    this.playerCount += instance.getOnline();
                 }
             });
         },0, 30*20);
@@ -92,7 +93,7 @@ public class InstanceMonitor {
      * @param name Name of the instance.
      * @return Instance with that name.
      */
-    public Instance getInstance(String name) {
+    public Instance getInstance(@NotNull final String name) {
         try(Jedis jedis = plugin.getRedis().jedisPool().getResource()) {
             return new Instance(jedis.get("servers:" + name));
         }
@@ -103,7 +104,7 @@ public class InstanceMonitor {
      * @param name Name of the instance.[l
      * @return Instance with that name.
      */
-    public CompletableFuture<Instance> getInstanceAsync(String name) {
+    public CompletableFuture<Instance> getInstanceAsync(@NotNull final String name) {
         return CompletableFuture.supplyAsync(() -> getInstance(name));
     }
 
@@ -117,9 +118,9 @@ public class InstanceMonitor {
 
         // Get the Instances from Redis.
         try(Jedis jedis = plugin.getRedis().jedisPool().getResource()) {
-            Set<String> names = jedis.keys("servers:*");
+            final Set<String> names = jedis.keys("servers:*");
 
-            for(String key : names) {
+            for(final String key : names) {
                 instances.add(new Instance(jedis.get(key)));
             }
         }
@@ -141,7 +142,7 @@ public class InstanceMonitor {
      * @return Player count of the Minigame.
      */
     public int getPlayerCount(final Minigame minigame) {
-        return playerCounts.get(minigame);
+        return this.playerCounts.get(minigame);
     }
 
     /**

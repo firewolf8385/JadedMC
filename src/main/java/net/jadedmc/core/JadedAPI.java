@@ -110,7 +110,7 @@ public class JadedAPI {
     }
 
     public static void sendToServer(@NotNull final UUID uuid, @NotNull final String server) {
-        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> plugin.getRedis().publish("jadedmc", "connect " + uuid.toString() + " " + server));
+        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> plugin.getRedis().publish("proxy", "connect " + uuid.toString() + " " + server));
     }
 
     public static void sendToLobby(@NotNull final Player player, final Minigame minigame) {

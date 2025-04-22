@@ -28,28 +28,49 @@ package net.jadedmc.core.networking;
 import net.jadedmc.core.JadedAPI;
 import net.jadedmc.utils.player.PluginPlayer;
 import org.bson.Document;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+/**
+ * Represents a player anywhere on the JadedMC network.
+ * Data is stored in Redis
+ */
 public class NetworkPlayer extends PluginPlayer {
     private final String skin;
     private final String serverName;
 
-    public NetworkPlayer(Document document) {
+    /**
+     * Creates a new NetworkPlayer using a Bson document.
+     * @param document Document to load the player from.
+     */
+    public NetworkPlayer(@NotNull final Document document) {
         super(UUID.fromString(document.getString("uuid")), document.getString("displayName"));
         this.skin = document.getString("skin");
         this.serverName = document.getString("server");
     }
 
+    /**
+     * Gets the skin of the player.
+     * @return Player's skin.
+     */
     public String getSkin() {
-        return skin;
+        return this.skin;
     }
 
+    /**
+     * Get the instance of the server the player is currently on.
+     * @return Player's server instance.
+     */
     public Instance getServer() {
         return JadedAPI.getServer(serverName);
     }
 
+    /**
+     * Gets the name of the server the player is currently on.
+     * @return Player's server.
+     */
     public String getServerName() {
-        return serverName;
+        return this.serverName;
     }
 }

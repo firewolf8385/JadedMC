@@ -84,7 +84,7 @@ public class CurrentInstance {
             socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
             this.address = socket.getLocalAddress().getHostAddress();
         }
-        catch (UnknownHostException | SocketException e) {
+        catch (UnknownHostException | SocketException exception) {
             this.address = "0.0.0.0";
         }
     }

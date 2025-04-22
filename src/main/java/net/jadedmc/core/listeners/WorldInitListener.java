@@ -46,5 +46,6 @@ public class WorldInitListener implements Listener {
 
         // Prevent storing spawn chunks.
         event.getWorld().setKeepSpawnInMemory(false);
+        event.getWorld().setAutoSave(false);
     }
 }
