@@ -183,7 +183,7 @@
         <dependency>
             <groupId>com.github.JadedMC</groupId>
             <artifactId>JadedChat</artifactId>
-            <version>0.7</version>
+            <version>45fdadf69b</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
