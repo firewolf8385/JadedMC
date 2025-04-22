@@ -26,15 +26,20 @@
 package net.jadedmc.core.commands;
 
 import net.jadedmc.core.JadedAPI;
+import net.jadedmc.core.JadedMCPlugin;
 import net.jadedmc.core.networking.InstanceStatus;
+import net.jadedmc.core.networking.InstanceType;
+import net.jadedmc.jadedchat.JadedChat;
 import net.jadedmc.utils.chat.ChatUtils;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
 public class InstanceCMD extends AbstractCommand {
+    private final JadedMCPlugin plugin;
 
-    public InstanceCMD() {
+    public InstanceCMD(@NotNull final JadedMCPlugin plugin) {
         super("instance", "jadedcore.instance", true);
+        this.plugin = plugin;
     }
 
     @Override
@@ -47,6 +52,79 @@ public class InstanceCMD extends AbstractCommand {
             case "close" -> {
                 JadedAPI.getCurrentInstance().setStatus(InstanceStatus.CLOSED);
                 ChatUtils.chat(sender, "<green><bold>Instance</bold> <dark_gray>» <green>Instance has been marked as closed.");
+            }
+
+            case "memory" -> {
+                ChatUtils.chat(sender, "<green><bold>Instance</bold> <dark_gray>» <green>Max: " + Runtime.getRuntime().maxMemory());
+                ChatUtils.chat(sender, "<green><bold>Instance</bold> <dark_gray>» <green>Free: " + Runtime.getRuntime().freeMemory());
+            }
+
+            case "check" -> {
+                boolean passed = true;
+
+                if(Runtime.getRuntime().maxMemory() == 1073741824) {
+                    ChatUtils.chat(sender, "<red><bold>Instance</bold> <dark_gray>» <red>Maximum memory set to 1 GB!");
+                    passed = false;
+                }
+
+                if(plugin.getServer().getMaxPlayers() == 20) {
+                    ChatUtils.chat(sender, "<red><bold>Instance</bold> <dark_gray>» <red>Maximum players set to 20!");
+                    passed = false;
+                }
+
+                if(plugin.getServer().getAllowNether()) {
+                    ChatUtils.chat(sender, "<red><bold>Instance</bold> <dark_gray>» <red>The nether is enabled!");
+                    passed = false;
+                }
+
+                if(plugin.getServer().getAllowEnd()) {
+                    ChatUtils.chat(sender, "<red><bold>Instance</bold> <dark_gray>» <red>The end is enabled!");
+                    passed = false;
+                }
+
+                if(!plugin.getServer().spigot().getSpigotConfig().getBoolean("advancements.disable-saving")) {
+                    ChatUtils.chat(sender, "<red><bold>Instance</bold> <dark_gray>» <red>Advancements saving is enabled!");
+                    passed = false;
+                }
+
+                if(!plugin.getServer().spigot().getSpigotConfig().getBoolean("players.disable-saving")) {
+                    ChatUtils.chat(sender, "<red><bold>Instance</bold> <dark_gray>» <red>Player saving is enabled!");
+                    passed = false;
+                }
+
+                if(!plugin.getServer().spigot().getSpigotConfig().getBoolean("stats.disable-saving")) {
+                    ChatUtils.chat(sender, "<red><bold>Instance</bold> <dark_gray>» <red>Stats saving is enabled!");
+                    passed = false;
+                }
+
+                if(!plugin.getServer().getPluginManager().isPluginEnabled("JadedSync")) {
+                    ChatUtils.chat(sender, "<red><bold>Instance</bold> <dark_gray>» <red>JadedSync is not installed!");
+                    passed = false;
+                }
+
+                if(!plugin.getServer().getPluginManager().isPluginEnabled("JadedParty")) {
+                    ChatUtils.chat(sender, "<red><bold>Instance</bold> <dark_gray>» <red>JadedParty is not installed!");
+                    passed = false;
+                }
+
+                if(JadedChat.getServer().equalsIgnoreCase("server")) {
+                    ChatUtils.chat(sender, "<red><bold>Instance</bold> <dark_gray>» <red>JadedChat server name not set!");
+                    passed = false;
+                }
+
+                if(!JadedChat.isMySQLEnabled()) {
+                    ChatUtils.chat(sender, "<red><bold>Instance</bold> <dark_gray>» <red>JadedChat MySQL is not set!");
+                    passed = false;
+                }
+
+                if(plugin.getInstanceMonitor().getCurrentInstance().getType() == InstanceType.LOBBY && !plugin.getServer().getPluginManager().isPluginEnabled("DiscordSRV")) {
+                    ChatUtils.chat(sender, "<red><bold>Instance</bold> <dark_gray>» <red>DiscordSRV is not installed!");
+                    passed = false;
+                }
+
+                if(passed) {
+                    ChatUtils.chat(sender, "<green><bold>Instance</bold> <dark_gray>» <green>Instance has passed all setup checks.");
+                }
             }
         }
     }
