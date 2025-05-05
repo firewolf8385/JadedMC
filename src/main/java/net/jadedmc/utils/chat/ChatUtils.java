@@ -54,7 +54,6 @@ public class ChatUtils {
      * @return Centered message.
      */
     public static String centerText(String message) {
-
         if(message.equals("")) {
             return message;
         }
@@ -151,6 +150,10 @@ public class ChatUtils {
      * @return Translated Message.
      */
     public static Component translate(String message) {
+
+        // Define custom "tags". (I can't figure out how to do this properly lol).
+        message = message.replace("<primary>", "<color:#92fe59>");
+        message = message.replace("<secondary>", "<color:#fae39b>");
 
         // Checks for the "<center>" tag, which centers a message.
         if(message.startsWith("<center>")) {
