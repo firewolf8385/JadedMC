@@ -181,7 +181,7 @@ class Placeholders extends PlaceholderExpansion {
         }
 
         if(identifier.contains("rank_color")) {
-            return jadedPlayer.getRank().getChatColor();
+            return jadedPlayer.getRank().getRankColor();
         }
 
         if(identifier.contains("server_name")) {
