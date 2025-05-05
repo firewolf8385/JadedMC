@@ -272,6 +272,20 @@ public class JadedAPI {
         return plugin.getMySQL();
     }
 
+    public static NetworkPlayer getNetworkPlayer(final UUID uuid) {
+        return new NetworkPlayer(Document.parse(plugin.getRedis().get("jadedplayers:" + uuid.toString())));
+    }
+
+    public static PlayerMap<NetworkPlayer> getNetworkPlayers(final Collection<UUID> uuids) {
+        final PlayerMap<NetworkPlayer> networkPlayers = new PlayerMap<>();
+
+        for(final UUID uuid : uuids) {
+            networkPlayers.add(getNetworkPlayer(uuid));
+        }
+
+        return networkPlayers;
+    }
+
     public static Redis getRedis() {
         return plugin.getRedis();
     }
