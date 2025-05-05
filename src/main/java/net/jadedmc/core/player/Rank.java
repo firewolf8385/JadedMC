@@ -32,6 +32,19 @@ import net.jadedmc.utils.chat.StringUtils;
  * Represents a rank in the server.
  */
 public enum Rank {
+    OWNER("owner", 11, "<red>[Owner]</red>", "<white>", "<color:#fa7070>", "&c&lOwner"),
+    ADMIN("admin", 10, "<red>[Admin]</red>", "<white>", "<color:#fa7070>", "&c&lAdmin"),
+    MOD("mod", 9, "<color:#FF6E00>[Mod]</color>", "<white>", "<color:#E77D22>", "&6&lMod"),
+    HELPER("helper", 8, "<color:#FF6E00>[Helper]</color>", "<white>", "<color:#E77D22>", "&6&lHelper"),
+    BUILDER("builder", 7, "<color:#FFCC00>[Builder]</color>", "<white>", "<color:#FFDF06>", "&e&lBuilder"),
+    DEVELOPER("developer", 6, "<color:#FFCC00>[Developer]", "<white>", "<color:#FFDF06>", "&e&lDeveloper"),
+    YOUTUBE("youtube", 5, "<gradient:#ff0505:#ffffff><bold>YouTube</bold></gradient>", "<white>", "<gradient:#ff0505:#ffffff>", "&c&lYou&f&lTube"),
+    JADED("jaded", 4, "<color:#92FE50>[Jaded]</color>", "<white>", "<color:#ABFE78>", "&a&lJaded"),
+    SAPPHIRE("sapphire", 3, "<color:#387cfc>[Sapphire]</color>", "<white>", "<color:#0097ff>", "&9&lSapphire"),
+    AMETHYST("amethyst", 2, "<color:#9662ca>[Amethyst]</color>", "<white>", "<color:#a77bd3>", "&5&lAmethyst"),
+    GARNET("garnet", 1, "<gradient:#ff05aa:#fc31c2><bold>Garnet</bold></gradient>", "<white>", "<gradient:#ff05aa:#fc31c2>", "&d&lGarnet"),
+    DEFAULT("default", 0, "<gray>Default</gray>", "<gray>", "<gray>", "");
+    /*
     OWNER("owner", 11, "<gradient:#ff2c3a:#fa7070><bold>Owner</bold></gradient>", "<color:#fa7070>", "<gradient:#ff2c3a:#fa7070>", "&c&lOwner"),
     ADMIN("admin", 10, "<gradient:#ff2c3a:#fa7070><bold>Admin</bold></gradient>", "<color:#fa7070>", "<gradient:#ff2c3a:#fa7070>", "&c&lAdmin"),
     MOD("mod", 9, "<gradient:#ff5f05:#fa7c33><bold>Mod</bold></gradient>", "<color:#fa7c33>", "<gradient:#ff5f05:#fa7c33>", "&6&lMod"),
@@ -44,6 +57,8 @@ public enum Rank {
     AMETHYST("amethyst", 2, "<gradient:#7605ff:#ac0ef6><bold>Amethyst</bold></gradient>", "<color:#ac0ef6>", "<gradient:#7605ff:#ac0ef6>", "&5&lAmethyst"),
     GARNET("garnet", 1, "<gradient:#ff05aa:#fc31c2><bold>Garnet</bold></gradient>", "<color:#fc31c2>", "<gradient:#ff05aa:#fc31c2>", "&d&lGarnet"),
     DEFAULT("default", 0, "<gray>Default</gray>", "<gray>", "<gray>", "");
+
+     */
 
     private final String name;
     private final String displayName;
