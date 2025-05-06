@@ -298,4 +298,20 @@ public class JadedAPI {
     public static boolean isLobbyWorld(@NotNull final World world) {
         return plugin.getLobbyManager().isLobbyWorld(world);
     }
+
+    public static void summonPlayer(@NotNull final UUID uuid) {
+        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> plugin.getRedis().publish("proxy", "connect " + uuid.toString() + " " + plugin.getInstanceMonitor().getCurrentInstance().getName()));
+    }
+
+    public static void summonPlayers(@NotNull final Collection<UUID> uuids) {
+        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+            final StringBuilder builder = new StringBuilder();
+
+            for(final UUID uuid : uuids) {
+                builder.append(uuid.toString()).append(",");
+            }
+
+            plugin.getRedis().publish("proxy", "connect " + builder.substring(0, builder.length() - 2) + " " + plugin.getInstanceMonitor().getCurrentInstance().getName());
+        });
+    }
 }
